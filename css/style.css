@@ -427,7 +427,11 @@ section {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--color-border);
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, filter 0.3s ease;
+}
+
+[data-theme="dark"] .profile-photo {
+  filter: brightness(0.9) contrast(1.05);
 }
 
 /* ===== Skills ===== */
