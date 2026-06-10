@@ -124,6 +124,54 @@
     });
   }
 
+  // ===== Copy Email to Clipboard =====
+  var copyEmailLinks = document.querySelectorAll(".copy-email");
+  copyEmailLinks.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var email = link.getAttribute("data-email");
+      if (!email) return;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(function () {
+          showCopyToast(link);
+        });
+      } else {
+        // Fallback for older browsers
+        var textarea = document.createElement("textarea");
+        textarea.value = email;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        showCopyToast(link);
+      }
+    });
+  });
+
+  function showCopyToast(el) {
+    var toast = document.createElement("span");
+    toast.textContent = "Copied!";
+    toast.className = "copy-toast";
+    el.appendChild(toast);
+
+    // Position near the element
+    requestAnimationFrame(function () {
+      toast.classList.add("visible");
+    });
+
+    setTimeout(function () {
+      toast.classList.remove("visible");
+      setTimeout(function () {
+        if (toast.parentNode) {
+          toast.parentNode.removeChild(toast);
+        }
+      }, 200);
+    }, 1500);
+  }
+
   // If no IntersectionObserver support, just show everything
   if (!("IntersectionObserver" in window)) {
     document.querySelectorAll("section, .timeline-item, .project-card, .education-item").forEach(function (el) {
