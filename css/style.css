@@ -431,7 +431,8 @@ section {
 }
 
 [data-theme="dark"] .profile-photo {
-  filter: brightness(0.9) contrast(1.05);
+  filter: brightness(0.75) contrast(1.1) saturate(0.9);
+  border-color: var(--color-primary);
 }
 
 /* ===== Skills ===== */
