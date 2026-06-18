@@ -60,34 +60,6 @@
   color-scheme: dark;
 }
 
-/* ===== System Dark Mode (before JS loads) ===== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0f172a;
-    --color-bg-alt: #1e293b;
-    --color-surface: #1e293b;
-    --color-border: #334155;
-    --color-text: #f1f5f9;
-    --color-text-secondary: #cbd5e1;
-    --color-text-muted: #94a3b8;
-    --color-primary: #3b82f6;
-    --color-primary-hover: #60a5fa;
-    --color-primary-light: #1e3a5f;
-    --color-tag-bg: #334155;
-    --color-tag-text: #e2e8f0;
-    --color-shadow: rgba(0, 0, 0, 0.3);
-    --color-shadow-lg: rgba(0, 0, 0, 0.5);
-    --color-nav-bg: rgba(15, 23, 42, 0.85);
-    --color-nav-shadow: rgba(0, 0, 0, 0.3);
-    --color-footer-bg: #1e293b;
-    --color-card-bg: #1e293b;
-    --color-input-bg: #1e293b;
-    --color-hero-bg: #0f172a;
-
-    color-scheme: dark;
-  }
-}
-
 /* ===== Reset & Base ===== */
 *,
 *::before,
@@ -220,7 +192,7 @@ ul {
   display: none;
 }
 
-:root:not([data-theme="dark"]) .theme-toggle .icon-sun {
+[data-theme="light"] .theme-toggle .icon-sun {
   display: inline;
 }
 

@@ -14,35 +14,19 @@
   }
 
   // ===== Theme Toggle =====
-  var theme = localStorage.getItem("theme");
-  var systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-  if (theme === "dark" || (!theme && systemDark.matches)) {
-    document.documentElement.setAttribute("data-theme", "dark");
-  }
-
   if (themeToggle) {
     themeToggle.addEventListener("click", function () {
       var current = document.documentElement.getAttribute("data-theme");
       var next = current === "dark" ? "light" : "dark";
-      if (next === "dark") {
-        document.documentElement.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.removeAttribute("data-theme");
-        localStorage.setItem("theme", "light");
-      }
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
     });
   }
 
   // Follow system theme changes (only if user hasn't set a manual preference)
-  systemDark.addEventListener("change", function (e) {
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
     if (!localStorage.getItem("theme")) {
-      if (e.matches) {
-        document.documentElement.setAttribute("data-theme", "dark");
-      } else {
-        document.documentElement.removeAttribute("data-theme");
-      }
+      document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
     }
   });
 
