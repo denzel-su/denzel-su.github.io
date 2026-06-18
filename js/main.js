@@ -14,8 +14,10 @@
   }
 
   // ===== Theme Toggle =====
-  var theme = localStorage.getItem("theme") || "light";
-  if (theme === "dark") {
+  var theme = localStorage.getItem("theme");
+  var systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  if (theme === "dark" || (!theme && systemDark.matches)) {
     document.documentElement.setAttribute("data-theme", "dark");
   }
 
@@ -32,6 +34,17 @@
       }
     });
   }
+
+  // Follow system theme changes (only if user hasn't set a manual preference)
+  systemDark.addEventListener("change", function (e) {
+    if (!localStorage.getItem("theme")) {
+      if (e.matches) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+    }
+  });
 
   // ===== Mobile Menu =====
   if (mobileMenuBtn) {
